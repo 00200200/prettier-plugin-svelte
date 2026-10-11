@@ -33,7 +33,7 @@ import { base64ToString } from './base64-string';
 import { AST } from 'svelte/compiler';
 
 const {
-    builders: { group, hardline, softline, indent, dedent, literalline },
+    builders: { group, hardline, softline, indent, dedent, literalline, lineSuffixBoundary },
     utils: { removeLines },
 } = doc;
 
@@ -213,7 +213,7 @@ export function embed(path: AstPath, _options: Options) {
                 if (node.surroundWithSoftline) {
                     docs = group(indent([softline, group(docs), dedent(softline)]));
                 }
-                return docs;
+                return [docs, lineSuffixBoundary];
             } catch (e) {
                 return getText(node, options, true);
             }

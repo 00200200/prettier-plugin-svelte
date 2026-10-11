@@ -1,0 +1,27 @@
+{#if true /* condition */}{/if}
+
+{#if yes}
+    <p>yes</p>
+{:else if no /* alternate */}
+    <p>no</p>
+{/if}
+
+{#each items /* list */ as item (item.id /* key */)}
+    {item /* value */}
+{/each}
+
+{#await promise /* promise */ then value}
+    {value}
+{/await}
+
+{#key value /* key */}
+    <p>{value}</p>
+{/key}
+
+{value /* first */ /* second */}
+{value /* parentheses */}
+{value // line comment
+}
+
+<div title={value /* attribute */}></div>
+{@html value /* html */}
