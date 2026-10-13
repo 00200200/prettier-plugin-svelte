@@ -1,0 +1,4 @@
+<script lang="ts">const value: string = "foo";</script>
+{(/foo/ as RegExp).test(value)}
+{(/foo/).test(value as string)}
+{(/foo/) satisfies RegExp}

@@ -483,8 +483,24 @@ export function print(path: AstPath, options: ParserOptions, print: PrintFn): Do
                 }
             }
         }
-        case 'ExpressionTag':
-            return ['{', printJS(path, print, 'expression'), '}'];
+        case 'ExpressionTag': {
+            const expression = printJS(path, print, 'expression');
+            // A leading slash in markup would be read as a block closing tag.
+            if (
+                path.getParentNode()?.type === 'Fragment' &&
+                doc.utils.findInDoc(
+                    expression,
+                    (part) =>
+                        typeof part === 'string' && part.length > 0
+                            ? part.startsWith('/')
+                            : undefined,
+                    false,
+                )
+            ) {
+                return group(['{(', indent([softline, expression]), softline, ')}']);
+            }
+            return ['{', expression, '}'];
+        }
         case 'IfBlock': {
             const def: Doc[] = [
                 '{#if ',

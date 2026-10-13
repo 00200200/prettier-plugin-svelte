@@ -1,0 +1,18 @@
+<div>{(/^[A-Za-z ]+$/.test(value) ? x : y)}</div>
+{(/foo/)}
+{(/foo/.source)}
+{(/foo/.test(value))}
+{(/foo/.test(value) && /bar/.test(value))}
+{(/foo/ instanceof RegExp)}
+{value.match(/foo/)}
+<div pattern={/foo/} title="prefix {/foo/}"></div>
+{#if /foo/.test(value)}
+    <p>Matched</p>
+{/if}
+<div>
+    {(
+        /^[A-Za-z ]+$/.test(value)
+            ? veryLongMatchingValueFromTheRegularExpression
+            : veryLongNonMatchingValueFromTheRegularExpression
+    )}
+</div>
